@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
@@ -21,17 +22,20 @@ namespace HazardAvoidanceSystem
             var email = txtEmail.Text;
             var password = txtPassword.Text;
             User user = Login(email, password);
-            if(user.role == "admin")
+            if (Page.IsPostBack)
             {
-                Response.Redirect("~/Admin.aspx?id=" + user.id);
-            }
-            else if(user.role == "manager")
-            {
-                Response.Redirect("~/Manager.aspx?id=" + user.id);
-            }
-            else if(user.role == "driver")
-            {
-                Response.Redirect("~/Driver.aspx?id=" + user.id);
+                if (user.role == "admin")
+                {
+                    Response.Redirect("~/Admin.aspx?id=" + user.id);
+                }
+                else if (user.role == "manager")
+                {
+                    Response.Redirect("~/Manager.aspx?id=" + user.id);
+                }
+                else if (user.role == "driver")
+                {
+                    Response.Redirect("~/Driver.aspx?id=" + user.id);
+                }
             }
         }
 
@@ -49,10 +53,44 @@ namespace HazardAvoidanceSystem
                 cmd.Parameters.AddWithValue("@email", email);
                 cmd.Parameters.AddWithValue("@password", password);
                 con.Open();
-                
+
+                using (SqlDataReader reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        user.email = reader["email"].ToString();
+                        if (ColumnExists(reader, "AdminID"))
+                        {
+                            user.role = "admin";
+                            user.id = Int32.Parse(reader["AdminID"].ToString());
+                        }
+                        else if (ColumnExists(reader, "ManagerID"))
+                        {
+                            user.role = "manager";
+                            user.id = Int32.Parse(reader["ManagerID"].ToString());
+                        }
+                        else if (ColumnExists(reader, "DriverID"))
+                        {
+                            user.role = "driver";
+                            user.id = Int32.Parse(reader["ManagerID"].ToString());
+                        }
+                    }
+                }
             }
 
             return user;
+        }
+
+        private bool ColumnExists(IDataReader reader, string ColumnName)
+        {
+            for (int i = 0; i < reader.FieldCount; i++)
+            {
+                if (reader.GetName(i).Equals(ColumnName, StringComparison.InvariantCultureIgnoreCase))
+                {
+                    return true;
+                }
+            }
+            return false;
         }
     }
 }
