@@ -52,7 +52,7 @@
                     <asp:Label runat="server" AssociatedControlID="txtName" Text="Optional Name for Route:" ></asp:Label>
                     <asp:TextBox runat="server" ID="txtName"></asp:TextBox>
                 </div>
-                <div class="text driver">
+                <div class="dropdown driver">
                     <asp:Label runat="server" AssociatedControlID="txtDriver" Text="Optional Driver for Route: "></asp:Label>
                     <asp:TextBox runat="server" ID="txtDriver"></asp:TextBox>
                 </div>
@@ -73,23 +73,25 @@
             </asp:View>
             <asp:View runat="server" ID="viewSeeRoute">
                 <div class="driver">
-                    <asp:Label runat="server" AssociatedControlID="ddlDrivers" Text="Select Driver: "></asp:Label>
-                    <asp:DropDownList runat="server" ID="ddlDrivers">
+                    <asp:Label runat="server" AssociatedControlID="ddlDrivers" Text="Select Driver: " ></asp:Label>
+                    <asp:DropDownList runat="server" ID="ddlDrivers" OnSelectedIndexChanged="ddlDrivers_OnSelectedIndexChanged" >
                         <asp:ListItem runat="server" Value="0" Text="Select A Driver:"></asp:ListItem>
-                        <asp:ListItem runat="server" Value="1" Text="Driver 1"></asp:ListItem>
-                        <asp:ListItem runat="server" Value="2" Text="Driver 2"></asp:ListItem>
-                        <asp:ListItem runat="server" Value="3" Text="Driver 3"></asp:ListItem>
-                        <asp:ListItem runat="server" Value="4" Text="Driver 4"></asp:ListItem>
-                        <asp:ListItem runat="server" Value="5" Text="Driver 5"></asp:ListItem>
+                    </asp:DropDownList>
+                </div>
+                <div class="routes">
+                    <asp:Label runat="server" AssociatedControlID="ddlRoutes" Text="Select Route: "></asp:Label>
+                    <asp:DropDownList runat="server" ID="ddlRoutes">
+                        <asp:ListItem runat="server" Value="0" Text="Select A Route:"></asp:ListItem>
                     </asp:DropDownList>
                 </div>
                 <br />
                 <div class="button-section">
-                    <asp:Button runat="server" ID="btnConfirmDriverMap" Text="Choose Driver" Width="250" OnClick="btnConfirmDriverMap_OnClick "/>
+                    <asp:Button runat="server" ID="btnConfirmDriverMap" Text="View Map" Width="250" OnClick="btnConfirmDriverMap_OnClick" />
                 </div>
                 <div id="map">
 
                 </div>
+                <asp:HiddenField runat="server" ID="hfRouteID" />
             </asp:View>
         </asp:MultiView>
     </div>

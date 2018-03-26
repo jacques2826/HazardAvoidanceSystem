@@ -139,6 +139,15 @@ namespace HazardAvoidanceSystem {
         protected global::System.Web.UI.WebControls.DropDownList ddlDrivers;
         
         /// <summary>
+        /// ddlRoutes control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlRoutes;
+        
+        /// <summary>
         /// btnConfirmDriverMap control.
         /// </summary>
         /// <remarks>
@@ -146,5 +155,14 @@ namespace HazardAvoidanceSystem {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnConfirmDriverMap;
+        
+        /// <summary>
+        /// hfRouteID control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hfRouteID;
     }
 }
