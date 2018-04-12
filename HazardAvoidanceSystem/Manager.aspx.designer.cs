@@ -76,22 +76,13 @@ namespace HazardAvoidanceSystem {
         protected global::System.Web.UI.WebControls.FileUpload fileNewRoute;
         
         /// <summary>
-        /// txtName control.
+        /// ddlDriver control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtName;
-        
-        /// <summary>
-        /// txtDriver control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtDriver;
+        protected global::System.Web.UI.WebControls.DropDownList ddlDriver;
         
         /// <summary>
         /// btnConfirmUpload control.
@@ -137,6 +128,15 @@ namespace HazardAvoidanceSystem {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlDrivers;
+        
+        /// <summary>
+        /// lblRoutes control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblRoutes;
         
         /// <summary>
         /// ddlRoutes control.

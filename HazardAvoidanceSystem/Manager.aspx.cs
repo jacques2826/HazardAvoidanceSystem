@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -20,6 +21,8 @@ namespace HazardAvoidanceSystem
         public void btnUploadRoute_OnClick(object sender, EventArgs e)
         {
             mvOptions.SetActiveView(viewUploadRoute);
+            var id = Int32.Parse(Context.Request.QueryString["id"].ToString());
+            getDriverList(id, ddlDriver);
         }
 
         public void btnChooseDriver_OnClick(object sender, EventArgs e)
@@ -36,15 +39,26 @@ namespace HazardAvoidanceSystem
         {
             mvOptions.SetActiveView(viewSeeRoute);
             ddlRoutes.Visible = false;
+            lblRoutes.Visible = false;
             var id = Int32.Parse(Context.Request.QueryString["id"].ToString());
-            getDriverList(id);
-            
-
+            getDriverList(id, ddlDrivers);
         }
 
         public void btnConfirmUpload_OnClick(object sender, EventArgs e)
         {
-
+            //TODO: Implement Uploading of route to database
+            var id = Int32.Parse(Context.Request.QueryString["id"]);
+            var driverID = Int32.Parse(ddlDriver.SelectedItem.Value);
+            string routeInfo;
+            bool success = false;
+            using (StreamReader inputStreamReader = new StreamReader(fileNewRoute.PostedFile.InputStream))
+            {
+                routeInfo = inputStreamReader.ReadToEnd();
+            }
+                if (id > 0 && driverID > 0)
+                {
+                    success = uploadNewRoute(id, driverID, routeInfo);
+                }
         }
 
         public void btnConfirmDriverMap_OnClick(object sender, EventArgs e)
@@ -54,20 +68,21 @@ namespace HazardAvoidanceSystem
             {
                 hfRouteID.Value = id.ToString();
             }
-            //map.Visible = true;
         }
 
         public void ddlDrivers_OnSelectedIndexChanged(object sender, EventArgs e)
         {
+            ddlRoutes.Items.Clear();
             var id = Int32.Parse(ddlDrivers.SelectedItem.Value);
             if (id > 0)
             {
                 getRouteList(id);
+                ddlRoutes.Visible = true;
+                lblRoutes.Visible = true;
             }
-            ddlRoutes.Visible = true;
         }
 
-        private void getDriverList(int id)
+        private void getDriverList(int id, DropDownList listName)
         {
             DataTable table = new DataTable();
             using (SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["dbconnection"].ConnectionString))
@@ -88,7 +103,7 @@ namespace HazardAvoidanceSystem
             foreach(DataRow row in table.Rows)
             {
                 ListItem lst = new ListItem(row[1].ToString() + " " + row[2].ToString(), row[0].ToString());
-                ddlDrivers.Items.Add(lst);
+                listName.Items.Add(lst);
             }
         }
 
@@ -115,6 +130,29 @@ namespace HazardAvoidanceSystem
                 ListItem lst = new ListItem("Route " + row[0].ToString(), row[0].ToString());
                 ddlRoutes.Items.Add(lst);
             }
+        }
+
+        private Boolean uploadNewRoute(int id, int driverID, string route)
+        {
+            bool success = false;
+            using (SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["dbconnection"].ConnectionString))
+            {
+                SqlCommand cmd = new SqlCommand("INSERT INTO [Route] VALUES(@managerID, @driverID, @route)", con);
+                cmd.CommandType = System.Data.CommandType.Text;
+
+                cmd.Parameters.AddWithValue("@managerID", id);
+                cmd.Parameters.AddWithValue("@driverID", driverID);
+                cmd.Parameters.AddWithValue("@route", route);
+
+                con.Open();
+                var num = cmd.ExecuteNonQuery();
+                if(num > 0)
+                {
+                    success = true;
+                }
+                con.Close();
+            }
+            return success;
         }
     }
 }

@@ -168,6 +168,7 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Handler\GetRoute.ashx" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Manager.aspx" />
     <Content Include="Map.aspx" />
@@ -246,6 +247,9 @@
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Handler\GetRoute.ashx.cs">
+      <DependentUpon>GetRoute.ashx</DependentUpon>
     </Compile>
     <Compile Include="Manager.aspx.cs">
       <DependentUpon>Manager.aspx</DependentUpon>
