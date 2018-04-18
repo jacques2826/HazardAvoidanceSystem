@@ -69,9 +69,7 @@
                         strokeOpacity: 1,
                         strokeWeight: 2
                     });
-
                     flightPath.setMap(map);
-                    //debugger;
                 },
                 error: function (data) {
                     console.log('Error ' + data);
@@ -79,5 +77,4 @@
             });
         }
     </script>
-<%--    <script src="/Scripts/Map.js" type="text/javascript"></script>--%>
 </asp:Content>
