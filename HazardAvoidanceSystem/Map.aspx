@@ -34,7 +34,7 @@
                 success: function (data) {
                     var json = JSON.parse(data);
                     var map = new google.maps.Map(document.getElementById('map'), {
-                        zoom: 10, 
+                        zoom: 12, 
                         center: new google.maps.LatLng(json.center[0], json.center[1])
                     });
 
@@ -56,6 +56,22 @@
                             });
                         });
                     }
+                    var myPath = []; 
+                    for (var i = 0; i < json.markers.length; i++) {
+                        var path = new google.maps.LatLng(json.markers[i].location[0], json.markers[i].location[1]);
+                        myPath.push(path);
+                    }
+
+                    var flightPath = new google.maps.Polyline({
+                        path: myPath,
+                        geodesic: true,
+                        strokeColor: '#ff0000',
+                        strokeOpacity: 1,
+                        strokeWeight: 2
+                    });
+
+                    flightPath.setMap(map);
+                    //debugger;
                 },
                 error: function (data) {
                     console.log('Error ' + data);
