@@ -67,12 +67,15 @@ namespace HazardAvoidanceSystem
             if (id > 0)
             {
                 hfRouteID.Value = id.ToString();
+                Response.Redirect("~/Map.aspx?routeID=" + id);
             }
         }
 
         public void ddlDrivers_OnSelectedIndexChanged(object sender, EventArgs e)
         {
             ddlRoutes.Items.Clear();
+            ListItem item = new ListItem("Select A Route", "0");
+            ddlRoutes.Items.Add(item);
             var id = Int32.Parse(ddlDrivers.SelectedItem.Value);
             if (id > 0)
             {
@@ -80,6 +83,7 @@ namespace HazardAvoidanceSystem
                 ddlRoutes.Visible = true;
                 lblRoutes.Visible = true;
             }
+
         }
 
         private void getDriverList(int id, DropDownList listName)

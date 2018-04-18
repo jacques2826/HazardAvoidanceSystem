@@ -72,7 +72,7 @@ namespace HazardAvoidanceSystem
                         else if (ColumnExists(reader, "DriverID"))
                         {
                             user.role = "driver";
-                            user.id = Int32.Parse(reader["ManagerID"].ToString());
+                            user.id = Int32.Parse(reader["DriverID"].ToString());
                         }
                     }
                 }

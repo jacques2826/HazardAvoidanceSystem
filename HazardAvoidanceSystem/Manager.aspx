@@ -88,28 +88,30 @@
                     <asp:Button runat="server" ID="btnConfirmDriverMap" Text="View Map" Width="250" OnClick="btnConfirmDriverMap_OnClick" OnClientClick="btnConfirmDriverMap_OnClientClick()" />
 
                 </div>
-                <div id="map" style="display: none;">
+<%--                <div id="map" style="display: none;">
 
-                </div>
+                </div>--%>
                 <asp:HiddenField runat="server" ID="hfRouteID" />
             </asp:View>
         </asp:MultiView>
     </div>
-    <script>
+<%--    <script>
         //function btnConfirmDriverMap_OnClick() {
+        //    debugger;
         //    initMap();
         //}
 
         function initMap() {
-            $('#map').show();
+            if ($('[id$="hfRouteID"]').val() > 0) {
+                $('#map').show();
 
-            const json = getJsonString();
+                const json = getJsonString();
 
-            var map = new google.maps.Map(document.getElementById('map'), {
-                zoom: 13,
-                center: new google.maps.LatLng(json.center[0], json.center[1])
-            });
-
+                var map = new google.maps.Map(document.getElementById('map'), {
+                    zoom: 13,
+                    center: new google.maps.LatLng(json.center[0], json.center[1])
+                });
+            }
             //var _d = {
             //    routeID: $('[id$="hfRouteID"]').val()
             //}
@@ -138,7 +140,6 @@
         }
 
         function getJsonString() {
-            debugger;
             var json;
             var _d = {
                 routeID: $('[id$="hfRouteID"]').val()
@@ -211,6 +212,6 @@
         //    ];
         //    return markers;
         //}
-    </script>
+    </script>--%>
     
 </asp:Content>

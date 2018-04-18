@@ -13,6 +13,15 @@ namespace HazardAvoidanceSystem {
     public partial class Map {
         
         /// <summary>
+        /// hfRouteID control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hfRouteID;
+        
+        /// <summary>
         /// mapKey control.
         /// </summary>
         /// <remarks>

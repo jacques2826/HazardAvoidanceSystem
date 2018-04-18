@@ -13,10 +13,6 @@
         <asp:Label runat="server" AssociatedControlID="ddlRoutes">Please Confirm Your Route:</asp:Label>
         <asp:DropDownList runat="server" ID="ddlRoutes" >
             <asp:ListItem runat="server" Value="0" Text="Choose A Route"></asp:ListItem>
-            <asp:ListItem runat="server" Value="1" Text="Route 1"></asp:ListItem>
-            <asp:ListItem runat="server" Value="2" Text="Route 2"></asp:ListItem>
-            <asp:ListItem runat="server" Value="3" Text="Route 3"></asp:ListItem>
-            <asp:ListItem runat="server" Value="4" Text="Route 4"></asp:ListItem>
         </asp:DropDownList>
         <br />
         <br />

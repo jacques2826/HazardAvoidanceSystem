@@ -11,7 +11,8 @@ namespace HazardAvoidanceSystem
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            var id = Context.Request.QueryString["routeID"].ToString();
+            hfRouteID.Value = id;
         }
 
     }
